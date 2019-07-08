@@ -1,17 +1,5 @@
 import { Injectable } from '@angular/core';
-
-@Injectable()
-export class EventService {
-  getEvents() {
-    // tslint:disable-next-line: no-use-before-declare
-    return EVENTS;
-  }
-
-  getEvent(id:number) {
-    return EVENTS.find(event => event.id === id);
-
-  }
-}
+import { Subject } from 'rxjs';
 
 const EVENTS = [
   {
@@ -319,3 +307,25 @@ const EVENTS = [
     ]
   }
 ];
+
+@Injectable()
+export class EventService {
+
+  getEvents() {
+
+    let subject = new Subject();
+
+    setTimeout(() => {
+      subject.next(EVENTS);
+      subject.complete();
+    }, 2000);
+
+    return subject;
+  }
+
+  getEvent(id: number) {
+    return EVENTS.find(event => event.id === id);
+
+  }
+}
+
