@@ -6,6 +6,11 @@ export class EventService {
     // tslint:disable-next-line: no-use-before-declare
     return EVENTS;
   }
+
+  getEvent(id:number) {
+    return EVENTS.find(event => event.id === id);
+
+  }
 }
 
 const EVENTS = [
