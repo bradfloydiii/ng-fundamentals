@@ -313,7 +313,7 @@ export class EventService {
 
   getEvents() {
 
-    let subject = new Subject();
+    const subject = new Subject();
 
     setTimeout(() => {
       subject.next(EVENTS);
