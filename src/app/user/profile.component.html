@@ -1,19 +1,69 @@
 <div>
-    <h1>Edit Your Profile </h1>
-    <hr>
-    <div class="col-md-4">
-      <form [formGroup]="profileForm" autocomplete="off" novalidate (ngSubmit)="saveProfile(profileForm.value)">
-        <div class="form-group">
-          <label for="firstName">First Name:</label>
-          <input formControlName="firstName" id="firstName" type="text" class="form-control" placeholder="First Name..." />
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name:</label>
-          <input formControlName="lastName" id="lastName" type="text" class="form-control" placeholder="Last Name..." />
-        </div>
+  <h1>Edit Your Profile</h1>
+  <hr />
+  <div class="col-md-4">
+    <form
+      [formGroup]="profileForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="saveProfile(profileForm.value)"
+    >
+      <div
+        class="form-group"
+        [ngClass]="{
+          error: !validInput(profileForm.controls.firstName)
+        }"
+      >
+        <label for="firstName">First Name:</label>
+        <em
+          *ngIf="
+            !validInput(profileForm.controls.firstName) &&
+            profileForm.controls.firstName?.errors.required
+          "
+          >Required</em
+        >
+        <em
+          *ngIf="
+            !validInput(profileForm.controls.firstName) &&
+            profileForm.controls.firstName?.errors.pattern
+          "
+          >Must start with letter</em
+        >
+        <input
+          formControlName="firstName"
+          id="firstName"
+          type="text"
+          class="form-control"
+          placeholder="First Name..."
+        />
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{
+          error: !validInput(profileForm.controls.lastName)
+        }"
+      >
+        <label for="lastName">Last Name:</label>
+        <em *ngIf="!validInput(profileForm.controls.lastName)">required</em>
+        <input
+          formControlName="lastName"
+          id="lastName"
+          type="text"
+          class="form-control"
+          placeholder="Last Name..."
+        />
+      </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="profileForm.invalid"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-default" (click)="cancel()">
+        Cancel
+      </button>
+    </form>
   </div>
+</div>

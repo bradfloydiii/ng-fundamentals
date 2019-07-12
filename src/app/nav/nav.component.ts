@@ -27,12 +27,9 @@ import { AuthService } from '../user/auth.service';
   ]
 })
 export class NavComponent implements OnInit {
-
   isAuthenticated: any;
 
-  constructor(private authService: AuthService) {
-    console.log(`isAuthenticated: ${authService.isAuthenticated()}`);
-  }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 }
