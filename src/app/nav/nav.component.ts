@@ -30,8 +30,8 @@ export class NavComponent implements OnInit {
 
   isAuthenticated: any;
 
-  constructor(private auth: AuthService) {
-    console.log(`isAuthenticated: ${auth.isAuthenticated()}`);
+  constructor(private authService: AuthService) {
+    console.log(`isAuthenticated: ${authService.isAuthenticated()}`);
   }
 
   ngOnInit() {}

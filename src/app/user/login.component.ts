@@ -5,23 +5,25 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: []
+  styles: [`
+    em {
+      float: right;
+      color: #e05c65;
+      padding-left: 10px;
+    }
+  `]
 })
 export class LoginComponent implements OnInit {
-
   userName: string;
   password: string;
+  mouseoverLogin: boolean;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   login(formValues) {
-    console.log('login');
     this.authService.loginUser(formValues.userName, formValues.password);
     this.router.navigate(['/events']);
   }
 
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

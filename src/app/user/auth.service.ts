@@ -5,17 +5,35 @@ import { IUser } from './user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: IUser;
+  // tslint:disable-next-line: variable-name
+  private _currentUser: IUser;
+
+  set currentUser(value) {
+    this._currentUser = value;
+  }
+
+  get currentUser(): IUser {
+    return this._currentUser;
+  }
+
   loginUser(userName: string, password: string) {
     this.currentUser = {
       id: 1,
       userName,
-      firstName: 'Bradley',
-      lastName: 'Floyd III'
+      firstName: 'Aloysius',
+      lastName: 'Reginald IV'
     };
   }
 
   isAuthenticated() {
-    return this.currentUser;
+    return this._currentUser;
+  }
+
+  updateCurrentUser(formValues) {
+    const { firstName, lastName } = formValues;
+    Object.assign(this.currentUser, {
+      firstName,
+      lastName
+    });
   }
 }
