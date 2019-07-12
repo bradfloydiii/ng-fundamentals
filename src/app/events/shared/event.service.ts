@@ -209,7 +209,7 @@ const EVENTS: IEvent[] = [
       },
       {
         id: 6,
-        name: 'These aren\'t the directives you\'re looking for',
+        name: "These aren't the directives you're looking for",
         presenter: 'John Papa',
         duration: 2,
         level: 'Intermediate',
@@ -312,9 +312,7 @@ const EVENTS: IEvent[] = [
 
 @Injectable()
 export class EventService {
-
-  getEvents(): Subject<IEvent[]>  {
-
+  getEvents(): Subject<IEvent[]> {
     const subject = new Subject<IEvent[]>();
 
     setTimeout(() => {
@@ -327,7 +325,11 @@ export class EventService {
 
   getEvent(id: number): IEvent {
     return EVENTS.find(event => event.id === id);
+  }
 
+  saveEvent(event) {
+    event.id = 999;
+    event.session = [];
+    EVENTS.push(event);
   }
 }
-
