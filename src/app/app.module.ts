@@ -10,7 +10,8 @@ import {
   EventDetailsComponent,
   CreateEventComponent,
   EventRouteActivatorService,
-  EventsListResolverService
+  EventsListResolverService,
+  SessionListComponent
 } from './events/index';
 
 import { AppComponent } from './app.component';
@@ -21,7 +22,6 @@ import { appRoutes } from 'src/routes';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateSessionComponent } from './events/event-details/create-session.component';
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -38,7 +38,8 @@ import { CreateSessionComponent } from './events/event-details/create-session.co
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
-    CreateSessionComponent
+    CreateSessionComponent,
+    SessionListComponent
   ],
   providers: [
     EventService,
