@@ -13,10 +13,16 @@ import { IEvent, ISession } from '../shared';
       .event-image {
         height: 100px;
       }
+
+      button:focus {
+        border: none;
+        outline: none;
+      }
     `
   ]
 })
 export class EventDetailsComponent implements OnInit {
+  filterBy = 'all';
   addMode: boolean;
   event: IEvent;
 

@@ -11,7 +11,8 @@ import {
   CreateEventComponent,
   EventRouteActivatorService,
   EventsListResolverService,
-  SessionListComponent
+  SessionListComponent,
+  DurationPipe
 } from './events/index';
 
 import {
@@ -44,7 +45,8 @@ import { CreateSessionComponent } from './events/event-details/create-session.co
     Error404Component,
     CreateSessionComponent,
     SessionListComponent,
-    CollapsibleWellComponent
+    CollapsibleWellComponent,
+    DurationPipe
   ],
   providers: [
     EventService,
