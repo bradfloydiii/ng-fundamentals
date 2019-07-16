@@ -23,6 +23,7 @@ import { IEvent, ISession } from '../shared';
 })
 export class EventDetailsComponent implements OnInit {
   filterBy = 'all';
+  sortBy = 'votes';
   addMode: boolean;
   event: IEvent;
 
