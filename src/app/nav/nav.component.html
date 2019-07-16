@@ -50,9 +50,16 @@
           </li>
         </ul>
       </div>
-      <form id="searchForm" class="navbar-form navbar-right">
+      <form
+        #searchForm="ngForm"
+        id="searchForm"
+        class="navbar-form navbar-right"
+        (ngSubmit)="searchSessions(searchTerm)"
+      >
         <div class="form-group">
           <input
+            [(ngModel)]="searchTerm"
+            name="searchTerm"
             type="text"
             class="form-control"
             placeholder="Search Sessions"

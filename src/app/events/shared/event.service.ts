@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { filter, map, scan } from 'rxjs/operators';
-import { IEvent } from './event.model';
+import { IEvent, ISession } from './event.model';
 
 const EVENTS: IEvent[] = [
   {
@@ -209,7 +209,7 @@ const EVENTS: IEvent[] = [
       },
       {
         id: 6,
-        name: "These aren't the directives you're looking for",
+        name: 'These aren\'t the directives you\'re looking for',
         presenter: 'John Papa',
         duration: 2,
         level: 'Intermediate',
@@ -338,5 +338,29 @@ export class EventService {
   updateEvent(event) {
     const index = EVENTS.findIndex(x => x.id === event.id);
     EVENTS[index] = event;
+  }
+
+  searchSessions(searchTerm: string) {
+    const term = searchTerm.toLocaleLowerCase();
+    let results: ISession[] = [];
+    let matchingSessions: any;
+
+    EVENTS.forEach(event => {
+      matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
+      matchingSessions = matchingSessions.map((session: any) => {
+        session.eventId = event.id;
+        return session;
+      });
+
+      results = results.concat(matchingSessions);
+    });
+
+    const emitter = new EventEmitter(true);
+
+    setTimeout(() => {
+      emitter.emit(results);
+    }, 100);
+    return emitter;
+
   }
 }
