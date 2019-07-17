@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Inject } from '@angular/core';
+import { JQ_TOKEN } from '../jquery.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -6,11 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './simple-modal.component.html',
   styleUrls: ['./simple-modal.component.css']
 })
-export class SimpleModalComponent implements OnInit {
+export class SimpleModalComponent {
   @Input() title: string;
   @Input() elementId: string;
+  @ViewChild('modalContainer') modalEl: ElementRef;
 
-  constructor() {}
+  constructor(@Inject(JQ_TOKEN) private $: any) {}
 
-  ngOnInit() {}
+  closeModal() {
+    this.$(this.modalEl.nativeElement).modal('hide');
+  }
+
 }
