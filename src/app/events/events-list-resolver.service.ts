@@ -8,6 +8,6 @@ export class EventsListResolverService implements Resolve<any> {
   constructor(private eventService: EventService) {}
   resolve() {
     // pipe serves to return the actual Observable then we can use the Observable's map function
-    return this.eventService.getEvents().pipe(map(events => events));
+    return this.eventService.getEvents();
   }
 }

@@ -34,8 +34,11 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.forEach((params: Params) => {
-      this.event = this.eventService.getEvent(Number(params.id));
+    this.route.data.forEach((data) => {
+      console.log('param:', data);
+      this.event = data.event;
+
+      // reset defaults
       this.addMode = false;
       this.filterBy = 'all';
       this.sortBy = 'votes';

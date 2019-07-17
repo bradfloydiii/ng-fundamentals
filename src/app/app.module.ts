@@ -12,8 +12,8 @@ import {
   SessionListComponent,
   DurationPipe,
   UpvoteComponent,
-  EventRouteActivatorService,
   EventsListResolverService,
+  EventResolverService,
   VoterService,
 } from './events/index';
 
@@ -32,6 +32,7 @@ import { Error404Component } from './errors/404.component';
 import { appRoutes } from 'src/routes';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { CreateSessionComponent } from './events/event-details/create-session.component';
 
 const toastr: Toastr = window['toastr'];
@@ -42,6 +43,7 @@ const jQuery = window['$'];
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [
@@ -63,11 +65,11 @@ const jQuery = window['$'];
   ],
   providers: [
     EventService,
+    EventResolverService,
     // long hand syntax
     { provide: TOASTR_TOKEN, useValue: toastr },
     { provide: JQ_TOKEN, useValue: jQuery },
     // long hand syntax with a useClass
-    { provide: EventRouteActivatorService, useClass: EventRouteActivatorService },
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState },
     EventsListResolverService,
     AuthService,
