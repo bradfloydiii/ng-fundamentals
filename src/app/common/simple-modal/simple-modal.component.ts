@@ -8,11 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SimpleModalComponent implements OnInit {
   @Input() title: string;
-  @Input() wtfuck: string;
+  @Input() elementId: string;
 
   constructor() {}
 
-  ngOnInit() {
-    console.log('wtfuck', this.wtfuck);
-  }
+  ngOnInit() {}
 }
