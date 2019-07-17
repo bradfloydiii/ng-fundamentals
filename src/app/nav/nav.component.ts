@@ -30,7 +30,7 @@ import { ISession, EventService } from '../events';
 export class NavComponent {
   isAuthenticated: any;
   searchTerm = '';
-  foundSessions: ISession;
+  foundSessions: ISession[];
 
   constructor(
     private authService: AuthService,

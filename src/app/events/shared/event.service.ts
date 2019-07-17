@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { filter, map, scan, catchError } from 'rxjs/operators';
 import { IEvent, ISession } from './event.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const EVENTS: IEvent[] = [
   {
@@ -323,11 +323,16 @@ export class EventService {
 
   getEvent(id: number): Observable<IEvent> {
     return this.http.get<IEvent>(`/api/events/${id}`)
-      .pipe(catchError(this.handleError<IEvent>('getEvents')));
+      .pipe(catchError(this.handleError<IEvent>('getEvent')));
   }
 
   // POST
   saveEvent(event) {
+    let options = { headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })};
+    return this.http.post<IEvent>('/api/events', event, options)
+    .pipe(catchError(this.handleError<IEvent>('saveEvent')));
     event.id = 999;
     event.session = [];
     EVENTS.push(event);
@@ -346,7 +351,9 @@ export class EventService {
     };
   }
 
-  searchSessions(searchTerm: string) {
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    return this.http.get<ISession[]>(`/api/sessions/search?search=${searchTerm}`)
+      .pipe(catchError(this.handleError<ISession[]>('searchSessions')));
     const term = searchTerm.toLocaleLowerCase();
     let results: ISession[] = [];
     let matchingSessions: any;
